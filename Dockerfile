@@ -7,8 +7,8 @@ RUN apk add --upgrade --update --no-cache openssh=7.4_p1-r0 git=2.11.1-r0 curl=7
 
 COPY files/sshd_config /etc/ssh/sshd_config
 COPY files/start.sh /start.sh
-COPY files/git_acl_shell-0.1.0.gem /tmp
-RUN gem install --no-rdoc --no-ri /tmp/git_acl_shell-0.1.0.gem
+COPY files/git_acl_shell-0.1.1.gem /tmp
+RUN gem install --no-rdoc --no-ri /tmp/git_acl_shell-0.1.1.gem
 
 VOLUME /etc/ssh/host-keys
 VOLUME /home/git
