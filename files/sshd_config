@@ -1,0 +1,14 @@
+Port 22
+ChallengeResponseAuthentication no
+# We're putting the host key in a non-standard location
+# so we can expose it in a volume without exposing
+# any other files in the same directory
+HostKey /etc/ssh/host-keys/ssh_host_rsa_key
+Protocol 2
+PermitRootLogin no
+PasswordAuthentication no
+MaxStartups 100:30:200
+AllowUsers git
+PrintMotd no
+PubkeyAuthentication yes
+UseDNS no

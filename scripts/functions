@@ -1,0 +1,3 @@
+function docker_image() {
+  echo ${DOCKER_REGISTRY}/cucumberpro/git-server:$(git rev-parse HEAD)
+}

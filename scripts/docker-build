@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+source "$(dirname "$0")/functions"
+
+docker build --rm --file Dockerfile --tag $(docker_image) .
