@@ -16,6 +16,31 @@ You need docker. You also need to set the registry and log in:
     # Make sure everything is committed - we'll use the git sha to tag the image
     ./scripts/docker-build
 
+## Upgrade the gem
+
+While [git_acl_shell](https://github.com/cucumber-ltd/git_acl_shell) is closed
+source and not pubished to rubygems.org, a copy of the gem is added to this repo.
+To update the gem, follow these steps:
+
+Remove the old gem:
+
+    git rm files/*.gem
+
+Build the new gem:
+
+    pushd ../git_acl_shell
+    gem build git_acl_shell.gemspec
+    # Make sure all files are committed
+    git tag vX.Y.Z
+    popd
+
+Copy the built `.gem` to `files/`:
+
+    cp ../git_acl_shell/*.gem files/
+    git add files/*.gem
+
+Update `Dockerfile` to reference the new gem.
+
 ## Publish the image
 
     # Make sure everything is committed...
