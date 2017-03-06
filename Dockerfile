@@ -1,9 +1,15 @@
 FROM alpine:3.5
 MAINTAINER Cucumber Limited <devs@cucumber.io>
 
-# Search Alpine packages: https://pkgs.alpinelinux.org/packages
-RUN apk add --upgrade --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-    openssh=7.4_p1-r1 git=2.11.1-r0 curl=7.52.1-r2 ruby=2.4.0-r0 ruby-json=2.4.0-r0 && \
+# We're using the v3.5 Alpine registry
+# Search Alpine packages: https://pkgs.alpinelinux.org/packages?name=&branch=v3.5&repo=main&arch=x86_64
+RUN apk add --upgrade --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.5/main \
+    openssh=7.4_p1-r0 \
+    git=2.11.1-r0 \
+    curl=7.52.1-r2 \
+    ruby=2.3.3-r0 \
+    ruby-json=2.3.3-r0 \
+    && \
     adduser -h /home/git -s /bin/sh -D -H -u 2000 git && passwd -u git
 
 COPY files/sshd_config /etc/ssh/sshd_config
