@@ -26,12 +26,18 @@ Remove the old gem:
 
     git rm files/*.gem
 
+Update the gem version:
+
+    # Bump the version and commit
+    vim ../git_acl_shell/lib/git_acl_shell/version.rb
+
 Build the new gem:
 
     pushd ../git_acl_shell
     gem build git_acl_shell.gemspec
     # Make sure all files are committed
     git tag vX.Y.Z
+    git push && git push --tags
     popd
 
 Copy the built `.gem` to `files/`:
