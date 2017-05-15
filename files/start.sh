@@ -16,13 +16,7 @@ else
     echo "Using existing host key"
 fi
 
-# Restore archived Git repositories
-archives=$(find ${archive_dir} -maxdepth 1 -mindepth 1 -type f -name "*.git.tgz" )
-for archive in ${archives}
-do
-  tar xzf "${archive}" --directory "${git_home}"
-  rm -rf "${archive}"
-done
+restore-git-repos
 
 mkdir -p ${git_home}/.ssh
 chmod 700 ${git_home}/.ssh

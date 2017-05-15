@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+archive_dir=/srv/git/archives
+git_home=/home/git
+
+
+# Restore archived Git repositories
+archives=$(find ${archive_dir} -maxdepth 1 -mindepth 1 -type f -name "*.git.tgz" )
+for archive in ${archives}
+do
+  git_repo_dir="${git_home}/$(basename ${archive} .tgz)"
+  echo "Restoring ${git_repo_dir} from ${archive}..."
+  rm -rf "${git_repo_dir}"
+  tar xzf "${archive}" --directory "${git_home}"
+  rm -rf "${archive}"
+done
