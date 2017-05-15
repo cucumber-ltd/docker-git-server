@@ -19,8 +19,8 @@ You need docker. You also need to set the registry and log in:
 ## Upgrade the gem
 
 While [git_acl_shell](https://github.com/cucumber-ltd/git_acl_shell) is closed
-source and not pubished to rubygems.org, a copy of the gem is added to this repo.
-To update the gem, follow these steps:
+source and not published to rubygems.org, a copy of the gem is added to this
+repo. To update the gem, follow these steps:
 
 Remove the old gem:
 
