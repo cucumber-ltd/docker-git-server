@@ -5,28 +5,39 @@ set -e
 [ "$DEBUG" == 'true' ] && set -x
 
 DAEMON=sshd
+archive_dir=/srv/git/archives
+git_home=/home/git
+host_keys_dir=/etc/ssh/host-keys
 
 # Generate Host keys, if required
-if [ ! -f /etc/ssh/host-keys/ssh_host_rsa_key ]; then
-    ssh-keygen -f /etc/ssh/host-keys/ssh_host_rsa_key -N '' -b 4096 -t rsa
+if [ ! -f ${host_keys_dir}/ssh_host_rsa_key ]; then
+    ssh-keygen -f ${host_keys_dir}/ssh_host_rsa_key -N '' -b 4096 -t rsa
 else
     echo "Using existing host key"
 fi
 
-mkdir -p /home/git/.ssh
-chmod 700 /home/git/.ssh
-touch /home/git/.ssh/authorized_keys
-chmod 600 /home/git/.ssh/authorized_keys
+# Restore archived Git repositories
+archives=$(find ${archive_dir} -maxdepth 1 -mindepth 1 -type f -name "*.git.tgz" )
+for archive in ${archives}
+do
+  tar xzf "${archive}" --directory "${git_home}"
+  rm -rf "${archive}"
+done
 
-# Make sure everything in /home/git is owned by git user, all ssh sessions will
+mkdir -p ${git_home}/.ssh
+chmod 700 ${git_home}/.ssh
+touch ${git_home}/.ssh/authorized_keys
+chmod 600 ${git_home}/.ssh/authorized_keys
+
+# Make sure everything in ${git_home} is owned by git user, all ssh sessions will
 # run as the git user.
-chown -R git:git /home/git
+chown -R git:git ${git_home}
 
 # Echo content and permissions for debugging purposes:
-echo "ls -al /home/git"
-ls -al /home/git
-echo "ls -al /home/git/.ssh"
-ls -al /home/git/.ssh
+echo "ls -al ${git_home}"
+ls -al ${git_home}
+echo "ls -al ${git_home}/.ssh"
+ls -al ${git_home}/.ssh
 
 stop() {
     echo "Received SIGINT or SIGTERM. Shutting down $DAEMON"
