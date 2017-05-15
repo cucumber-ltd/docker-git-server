@@ -52,7 +52,7 @@ stop() {
 }
 
 echo "Running $@"
-if [ "$(basename $DAEMON)" == "$DAEMON" ]; then
+if [ "$(basename $@)" == "$DAEMON" ]; then
     trap stop SIGINT SIGTERM
     $@ &
     pid="$!"
