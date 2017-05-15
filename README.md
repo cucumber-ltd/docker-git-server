@@ -34,6 +34,14 @@ This can be run from the host's command line:
 
     ./scripts/docker-run archive-git-repos
 
+## Restore repositories
+
+Git repository archives stored in the archive volume (`/srv/git/archives`) are
+automatically restored when the container starts. Existing repositories are
+overwritten. Archives are deleted after a successful restore.
+
+This prevents accidental overwriting of repositories after a second restart.
+
 ## Publish the image
 
     # Make sure everything is committed...
