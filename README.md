@@ -27,6 +27,13 @@ When you start the container on a Linux machine you should most likely pass `--u
 to `docker run`. We didn't default to `USER 2000` in the `Dockerfile` because it's a hassle
 on OS X.
 
+## Archive repositories
+
+The image has a built-in script that creates a `.git.tgz` archive for every git repo.
+This can be run from the host's command line:
+
+    ./scripts/docker-run archive-git-repos
+
 ## Publish the image
 
     # Make sure everything is committed...

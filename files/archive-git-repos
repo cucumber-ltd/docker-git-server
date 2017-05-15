@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+archive_dir=/srv/git/archives
+git_home=/home/git
+
+git_repositories=$(find ${git_home} -maxdepth 1 -mindepth 1 -type d -name "*.git" -exec basename {} \;)
+for repo in ${git_repositories}
+do
+  echo "Archiving ${repo}"
+  tar czf "${archive_dir}/${repo}.tgz" --directory ${git_home} "${repo}"
+done

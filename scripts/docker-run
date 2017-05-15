@@ -6,4 +6,4 @@ docker run --publish 2222:22 \
   --volume $(pwd)/data/srv/git/archives:/srv/git/archives \
   --volume $(pwd)/data/home/git:/home/git \
   --volume $(pwd)/data/etc/ssh/host-keys:/etc/ssh/host-keys \
-  $(docker_image)
+  $(docker_image) "$@"

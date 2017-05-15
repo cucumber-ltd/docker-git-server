@@ -14,6 +14,7 @@ RUN apk add --upgrade --update --no-cache --repository http://dl-cdn.alpinelinux
 
 COPY files/sshd_config /etc/ssh/sshd_config
 COPY files/start.sh /start.sh
+COPY files/archive-git-repos /usr/local/bin/archive-git-repos
 COPY files/git_acl_shell-1.0.1.gem /tmp
 RUN gem install --no-rdoc --no-ri /tmp/git_acl_shell-1.0.1.gem
 
