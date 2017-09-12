@@ -53,7 +53,13 @@ This prevents accidental overwriting of repositories after a second restart.
 
 ## Add your public key
 
+We're going to add the key specifying a command to run (`git_acl_shell`) when
+an SSH connection is established.
+
+    echo -n 'command="git-acl-shell some-account-uid http://localhost:99999",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ' > data/home/git/.ssh/authorized_keys
     cat ~/.ssh/id_rsa.pub >> data/home/git/.ssh/authorized_keys
+
+Under normal use, this line would be added by an application managing users' keys.
 
 ## Create a repo
 
@@ -73,31 +79,4 @@ You should be told interactive access is disallowed
 
 ## Upgrade the gem
 
-While [git_acl_shell](https://github.com/cucumber-ltd/git_acl_shell) is closed
-source and not published to rubygems.org, a copy of the gem is added to this
-repo. To update the gem, follow these steps:
-
-Remove the old gem:
-
-    git rm files/*.gem
-
-Update the gem version:
-
-    # Bump the version and commit
-    vim ../git_acl_shell/lib/git_acl_shell/version.rb
-
-Build the new gem:
-
-    pushd ../git_acl_shell
-    gem build git_acl_shell.gemspec
-    # Make sure all files are committed
-    git tag vX.Y.Z
-    git push && git push --tags
-    popd
-
-Copy the built `.gem` to `files/`:
-
-    cp ../git_acl_shell/*.gem files/
-    git add files/*.gem
-
-Update `Dockerfile` to reference the new gem.
+Update `Dockerfile` to reference a new version of `git_acl_shell` (it's open source).

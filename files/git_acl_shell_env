@@ -1,0 +1,5 @@
+# TODO: Figure out how to enable these env vars for git@ SSH connections.
+# https://github.com/cucumber-ltd/git_acl_shell/blob/7459ea0d3c07342c3104171543d3c695cabcb9c2/lib/git_acl_shell/shell.rb#L9-L11
+export git_acl_shell_no_shell_access_message="Welcome to Cucumber Pro!\nYou've successfully authenticated, but we do not provide shell access."
+export git_acl_shell_access_denied_message="Welcome to Cucumber Pro!\nYou've successfully authenticated, but you don't have access to this repo."
+export git_acl_shell_command_denied_message="Welcome to Cucumber Pro!\nYou've successfully authenticated, but the only allowed commands are git-receive-pack, git-upload-pack and git-upload-archive."
